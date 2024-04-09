@@ -42,7 +42,7 @@ ostream &operator<<(ostream &out, Personne &p) {
     out << p.prenom << endl;
     out << "Adresses: " << endl;
     for (int i = 0; i < (int) p.adresses.size(); i++) {
-        out << *p.adresses[i] << endl;
+        out << i+1 << ") " << *p.adresses[i];
     }
     return out;
 

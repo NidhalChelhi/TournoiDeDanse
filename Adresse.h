@@ -39,9 +39,6 @@ public:
 
     void setCodePostal(int codePostal) { this->codePostal = codePostal; }
 
-    // Methodes
-    void afficherAdresse();
-
 
     // Surcharge d'opérateurs
     friend ostream &operator<<(ostream &, Adresse &);

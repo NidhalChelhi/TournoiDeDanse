@@ -19,12 +19,8 @@ Adresse::~Adresse() {
     cout << "Destruction de l'adresse" << endl;
 }
 
-void Adresse::afficherAdresse() {
-    cout << rue << ", " << ville << ", " << pays << ", " << codePostal << endl;
-}
-
 ostream &operator<<(ostream &out, Adresse &a) {
-    out << a.rue << ", " << a.ville << ", " << a.pays << ", " << a.codePostal << endl;
+    out << "Pays: " << a.pays << ", Ville: " << a.ville << ", Rue: " << a.rue << ", Code Postal: " << a.codePostal << endl;
     return out;
 }
 
