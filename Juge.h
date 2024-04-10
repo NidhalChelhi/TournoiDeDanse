@@ -12,42 +12,32 @@ using namespace std;
 
 class Juge : public Personne {
 private:
-    int experience;
     int numJuge;
-    vector<Style *> styles;
+    int experience;
+
 public:
 
     // Const(s) & Dest
     Juge();
 
-    Juge(
-            int cin,
-            string nom,
-            string prenom,
-            int experience,
-            int numJuge,
-            vector<Style *> styles);
+    Juge(int cin, string nom, string prenom, int numJuge, int experience);
 
     Juge(const Juge &);
 
     ~Juge();
 
-
     // Getters
-    int getAge() { return experience; };
-
     int getNumJuge() { return numJuge; };
 
-    vector<Style *> getStyles() { return styles; };
-
+    int getExperience() { return experience; };
 
     // Setters
-    void setAge(int experience) {
-        this->experience = experience;
-    };
-
     void setNumJuge(int numJuge) {
         this->numJuge = numJuge;
+    };
+
+    void setExperience(int experience) {
+        this->experience = experience;
     };
 
 
@@ -57,14 +47,7 @@ public:
     friend istream &operator>>(istream &, Juge &);
 
 
-    // methode
-    int setPerfomances(Danseur &d) {
-        d.setCritere1(9);
-        d.setCritere2(10);
-        d.setCritere3(9);
-        d.setCritere4(2);
-
-        return d.getCritere1() * 2 + d.getCritere2() * 3 + d.getCritere3() * 8 + d.getCritere4() * 10;
-    }
+    // Methodes
+    int noterDanseur(Danseur &d, vector<Critere *> criteres);
 
 };

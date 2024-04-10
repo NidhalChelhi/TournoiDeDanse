@@ -16,16 +16,22 @@ Adresse::Adresse(string pays, string ville, string rue, int codePostal) {
 }
 
 Adresse::~Adresse() {
-    cout << "Destruction de l'adresse" << endl;
+    // Destructor
+}
+
+void Adresse::afficherAdresse() {
+    cout << "Pays: " << pays << ", Ville: " << ville << ", Rue: " << rue << ", Code Postal: " << codePostal << endl;
+
 }
 
 ostream &operator<<(ostream &out, Adresse &a) {
-    out << "Pays: " << a.pays << ", Ville: " << a.ville << ", Rue: " << a.rue << ", Code Postal: " << a.codePostal << endl;
+    out << "Pays: " << a.pays << ", Ville: " << a.ville << ", Rue: " << a.rue << ", Code Postal: " << a.codePostal
+        << endl;
     return out;
 }
 
 istream &operator>>(istream &in, Adresse &a) {
-    cout << "Saisir les informations de l'adresse:" << endl;
+    cout << "Saisie d'une adresse: ";
     cout << "Pays: ";
     in >> a.pays;
     cout << "Ville: ";

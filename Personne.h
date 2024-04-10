@@ -33,6 +33,8 @@ public:
 
     string getPrenom() { return prenom; };
 
+    string getFullName() { return prenom + " " + nom; };
+
     vector<Adresse *> getAdresses() { return adresses; };
 
 

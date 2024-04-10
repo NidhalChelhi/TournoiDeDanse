@@ -7,6 +7,8 @@ Style::Style() {
     this->ageMin = 0;
     this->ageMax = 0;
     this->niveau = "";
+
+
 }
 
 Style::Style(string nom, int ageMin, int ageMax, string niveau) {
@@ -17,13 +19,12 @@ Style::Style(string nom, int ageMin, int ageMax, string niveau) {
 }
 
 Style::~Style() {
-    cout << "Destruction de la style" << endl;
+    // Destructor
 }
 
 ostream &operator<<(ostream &out, Style &style) {
     out << "Nom: " << style.nom << ", Age min: " << style.ageMin << ", Age max: " << style.ageMax << ", Niveau: "
-        << style.niveau
-        << endl;
+        << style.niveau << endl;
     return out;
 }
 

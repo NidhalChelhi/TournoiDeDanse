@@ -18,4 +18,6 @@ add_executable(TournoiDeDanse main.cpp
         Competition.h
         Session.cpp
         Session.h
+        Critere.cpp
+        Critere.h
 )

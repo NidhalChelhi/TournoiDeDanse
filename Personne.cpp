@@ -22,7 +22,10 @@ Personne::Personne(const Personne &p) {
 }
 
 Personne::~Personne() {
-    cout << "Destruction de la personne" << endl;
+    for (Adresse *adresse: adresses) {
+        delete adresse;
+    };
+    adresses.clear();
 }
 
 void Personne::afficherDetails() {
@@ -36,13 +39,11 @@ void Personne::afficherDetails() {
 ostream &operator<<(ostream &out, Personne &p) {
     out << "CIN: ";
     out << p.cin << endl;
-    out << "Nom: ";
-    out << p.nom << endl;
-    out << "Prénom: ";
-    out << p.prenom << endl;
+    out << "Nom Complet: ";
+    out << p.nom << " " << p.prenom << endl;
     out << "Adresses: " << endl;
     for (int i = 0; i < (int) p.adresses.size(); i++) {
-        out << i+1 << ") " << *p.adresses[i];
+        out << i + 1 << ") " << *p.adresses[i];
     }
     return out;
 
@@ -50,7 +51,6 @@ ostream &operator<<(ostream &out, Personne &p) {
 }
 
 istream &operator>>(istream &in, Personne &p) {
-    cout << "Saisir les informations de la personne:" << endl;
     cout << "CIN: ";
     in >> p.cin;
     cout << "Nom: ";
