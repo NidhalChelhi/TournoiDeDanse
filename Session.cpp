@@ -2,92 +2,91 @@
 
 
 Session::Session() {
-    danseur1 = Danseur();
-    danseur2 = Danseur();
+    danseur1 = new Danseur();
+    danseur2 = new Danseur();
+    gagnant = new Danseur();
+
     juges = vector<Juge *>();
     criteres = vector<Critere *>();
-    gagnant = Danseur();
+
 }
 
-Session::Session(Danseur danseur1, Danseur danseur2, vector<Juge *> juges, vector<Critere *> criteres) {
-    this->danseur1 = danseur1;
-    this->danseur2 = danseur2;
-    this->juges = juges;
-    this->criteres = criteres;
-    gagnant = Danseur();
+Session::Session(const Danseur &d1, const Danseur &d2, const vector<Juge *> &j, const vector<Critere *> &c) {
+    danseur1 = new Danseur(d1);
+    danseur2 = new Danseur(d2);
+
+    for (Juge *judge: j) {
+        juges.push_back(judge);
+    }
+    for (Critere *critere: c) {
+        criteres.push_back(critere);
+    }
+    determinerGagnant();
 }
 
 Session::Session(const Session &s) {
-    danseur1 = s.danseur1;
-    danseur2 = s.danseur2;
-    juges = s.juges;
-    criteres = s.criteres;
-    gagnant = s.gagnant;
+    danseur1 = new Danseur(*s.danseur1);
+    danseur2 = new Danseur(*s.danseur2);
+    for (Juge *judge: s.juges) {
+        juges.push_back(new Juge(*judge));
+    }
+    for (Critere *critere: s.criteres) {
+        criteres.push_back(new Critere(*critere));
+    }
+    gagnant = new Danseur(*s.gagnant);
 }
 
 Session::~Session() {
+    delete danseur1;
+    delete danseur2;
+    delete gagnant;
+
     juges.clear();
     criteres.clear();
 }
 
-ostream &operator<<(ostream &out, Session &s) {
-    out << "********** AFFICHAGE SESSION **********" << endl;
-    out << "Juges: ";
-    for (int i = 0; i < s.juges.size(); i++) {
-        out << s.juges[i]->getFullName() << "\t";
-    }
-    out << endl;
-    out << "Danseur 1: " << s.danseur1.getFullName() << endl;
-    for (int i = 0; i < s.juges.size(); i++) {
-        s.juges[i]->noterDanseur(s.danseur1, s.criteres);
-    }
 
+void Session::determinerGagnant() {
+    for (int i = 0; i < juges.size(); i++) {
+        juges[i]->noterDanseur(*danseur1, criteres);
+        juges[i]->noterDanseur(*danseur2, criteres);
+    }
     float score1 = 0;
-
-    out << "Performances: ";
-    for (int i = 0; i < s.danseur1.getPerformances().size(); i++) {
-        out << s.danseur1.getPerformances()[i] << "\t";
-        score1 += s.danseur1.getPerformances()[i];
-
-    }
-    out << endl;
-    out << "Score: " << score1 << endl;
-
-
-    out << "Danseur 2: " << s.danseur2.getFullName() << endl;
-    for (int i = 0; i < s.juges.size(); i++) {
-        s.juges[i]->noterDanseur(s.danseur2, s.criteres);
-
-    }
     float score2 = 0;
-    out << "Performances: ";
-    for (int i = 0; i < s.danseur2.getPerformances().size(); i++) {
-        out << s.danseur2.getPerformances()[i] << "\t";
-        score2 += s.danseur2.getPerformances()[i];
-
+    for (int i = 0; i < danseur1->getPerformances().size(); i++) {
+        score1 += danseur1->getPerformances()[i];
+        score2 += danseur2->getPerformances()[i];
     }
-    out << endl;
-    out << "Score: " << score2 << endl;
-
-
     if (score1 > score2) {
-        s.gagnant = s.danseur1;
+        setGagnant(danseur1);
     } else {
-        s.gagnant = s.danseur2;
-    }
-    out << "*** GAGNANT: " << s.gagnant.getFullName() << endl;
+        setGagnant(danseur2);
+    };
+};
 
-    s.danseur1.setPerformances(vector<int>());
-    s.danseur2.setPerformances(vector<int>());
+ostream &operator<<(ostream &out, Session &s) {
+//    out << "Juges: ";
+//    for (int i = 0; i < s.juges.size(); i++) {
+//        out << s.juges[i]->getFullName() << "\t";
+//    }
+//    out << endl;
+    out << "Danseur 1: " << s.danseur1->getFullName() << endl;
+    out << "Danseur 2: " << s.danseur2->getFullName() << endl;
+    s.determinerGagnant();
+    out << "############# GAGNANT: " << s.gagnant->getFullName() << endl;
+    s.danseur1->setPerformances(vector<int>());
+    s.danseur2->setPerformances(vector<int>());
 
     return out;
 }
 
 istream &operator>>(istream &in, Session &s) {
+    s.danseur1 = new Danseur();
+    s.danseur2 = new Danseur();
     cout << "Entrez le danseur 1: " << endl;
-    in >> s.danseur1;
+    in >> *s.danseur1;
     cout << "Entrez le danseur 2: " << endl;
-    in >> s.danseur2;
+    in >> *s.danseur2;
     char rep;
     do {
         cout << "Entrez un juge: " << endl;
@@ -110,20 +109,5 @@ istream &operator>>(istream &in, Session &s) {
     return in;
 }
 
-
-Danseur Session::calculerGagnant() {
-    float score1 = 0;
-    float score2 = 0;
-    for (int i = 0; i < juges.size(); i++) {
-        score1 += juges[i]->noterDanseur(danseur1, criteres);
-        score2 += juges[i]->noterDanseur(danseur2, criteres);
-        if (score1 > score2) {
-            gagnant = danseur1;
-        } else {
-            gagnant = danseur2;
-        }
-    }
-    return gagnant;
-}
 
 

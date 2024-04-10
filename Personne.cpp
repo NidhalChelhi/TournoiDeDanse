@@ -51,12 +51,13 @@ ostream &operator<<(ostream &out, Personne &p) {
 }
 
 istream &operator>>(istream &in, Personne &p) {
-    cout << "CIN: ";
+    cout << "CIN:";
     in >> p.cin;
-    cout << "Nom: ";
-    in >> p.nom;
-    cout << "Prénom: ";
+    cout << "Prénom:";
     in >> p.prenom;
+    cout << "Nom:";
+    in >> p.nom;
+
     char rep;
     do {
         Adresse *adresse = new Adresse();

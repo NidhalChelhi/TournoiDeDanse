@@ -8,56 +8,44 @@ using namespace std;
 
 
 class Session {
-    Danseur danseur1;
-    Danseur danseur2;
+    Danseur *danseur1;
+    Danseur *danseur2;
     vector<Juge *> juges;
     vector<Critere *> criteres;
-
-    Danseur gagnant;
 public:
+    Danseur *gagnant;
+
     // const & dest
     Session();
 
-    Session(Danseur danseur1, Danseur danseur2, vector<Juge *> juges, vector<Critere *> criteres);
+    Session(const Danseur &d1, const Danseur &d2, const vector<Juge *> &j, const vector<Critere *> &c);
 
-    Session(const Session &);
+    Session(const Session &s);
 
     ~Session();
 
     // Getters
-    Danseur getDanseur1() { return danseur1; };
+    Danseur *getDanseur1() { return danseur1; }
 
-    Danseur getDanseur2() { return danseur2; };
+    Danseur *getDanseur2() { return danseur2; }
 
-    vector<Juge *> getJuges() { return juges; };
+    vector<Juge *> &getJuges() { return juges; }
 
-    vector<Critere *> getCriteres() { return criteres; };
+    vector<Critere *> &getCriteres() { return criteres; }
 
-    Danseur getGagnant() { return gagnant; };
+    Danseur *getGagnant() { return gagnant; }
 
-    // Setters
-    void setDanseur1(Danseur danseur1) { this->danseur1 = danseur1; };
+    void setGagnant(Danseur *d) { gagnant = d; }
 
-    void setDanseur2(Danseur danseur2) { this->danseur2 = danseur2; };
+    // Autres méthodes
 
-    void setJuges(vector<Juge *> juges) { this->juges = juges; };
-
-    void setCriteres(vector<Critere *> criteres) { this->criteres = criteres; };
+    void determinerGagnant();
 
 
     // Surcharge d'opérateurs
     friend ostream &operator<<(ostream &, Session &);
 
     friend istream &operator>>(istream &, Session &);
-
-
-
-    // Methodes
-
-    // Calculer le gagnant de la session
-    Danseur calculerGagnant();
-
-
 
 
 };

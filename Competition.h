@@ -24,12 +24,26 @@ public:
         nbSessionsInital = 0;
     };
 
-    Competition(Style style, int nbSessionsInital, vector<Session> sessions) {
-        this->style = new Style(style);
+    Competition(Style *style, int nbSessionsInital, vector<Session *> initialSessions) {
+
+        this->style = style;
         this->nbSessionsInital = nbSessionsInital;
         for (int i = 0; i < nbSessionsInital; i++) {
-            this->sessions.push_back(new Session(sessions[i]));
+            sessions.push_back(new Session(*initialSessions[i]));
+
         }
+        int i = 0;
+        int j = 1;
+
+
+        while (sessions.size() < 2 * nbSessionsInital - 1) {
+            Session *newSession = new Session(*sessions[i]->getGagnant(), *sessions[j]->getGagnant(),
+                                              sessions[i]->getJuges(), sessions[i]->getCriteres());
+           sessions.push_back(newSession);
+            i = i + 2;
+            j = j + 2;
+        };
+
     };
 
     Competition(const Competition &competition) {
@@ -49,21 +63,7 @@ public:
     };
 
 
-    // Opérateur d'affectation
-    Competition &operator=(const Competition &competition) {
-        if (this != &competition) {
-            delete style;
-            for (int i = 0; i < nbSessionsInital; i++) {
-                delete sessions[i];
-            }
-            style = new Style(*competition.style);
-            nbSessionsInital = competition.nbSessionsInital;
-            for (int i = 0; i < nbSessionsInital; i++) {
-                sessions.push_back(new Session(*competition.sessions[i]));
-            }
-        }
-        return *this;
-    };
+
 
     // Getters
     Style *getStyle() const { return style; };
@@ -80,43 +80,36 @@ public:
 
     void setSessions(vector<Session *> sessions) { this->sessions = sessions; };
 
+
+
     // Surcharge d'opérateurs
 
-    friend ostream &operator<<(ostream &os, const Competition &competition) {
-        os << "Style: " << *competition.style << endl;
-        os << "Nombre de sessions Initiale: " << competition.nbSessionsInital << endl;
-        for (int i = 0; i < competition.nbSessionsInital; i++) {
-            os << *competition.sessions[i] << endl;
+    friend ostream &operator<<(ostream &out, const Competition &competition) {
+        out << "Style: " << *competition.style << endl;
+        for (int i = 0; i < competition.sessions.size(); i++) {
+            if (i == competition.sessions.size() - 1) {
+                out << "**************** Finale ****************" << endl;
+            } else {
+                out << "**************** Session " << i + 1 << " ****************" << endl;
+            }
+
+            out << *competition.sessions[i] << endl;
         }
-        return os;
+        return out;
     };
 
-    friend istream &operator>>(istream &is, Competition &competition) {
+    friend istream &operator>>(istream &in, Competition &competition) {
         cout << "*** Saisie d'une competition ***" << endl;
-        is >> *competition.style;
+        in >> *competition.style;
         cout << "Nombre de sessions: ";
-        is >> competition.nbSessionsInital;
+        in >> competition.nbSessionsInital;
         for (int i = 0; i < competition.nbSessionsInital; i++) {
             Session *session = new Session();
-            is >> *session;
+            in >> *session;
             competition.sessions.push_back(session);
         }
-        for (int i = 0; i < competition.nbSessionsInital - 1; i = i + 2) {
-            Session *session = new Session(competition.sessions[i]->getGagnant(),
-                                           competition.sessions[i + 1]->getGagnant(),
-                                           competition.sessions[i]->getJuges(), {});
-            competition.sessions.push_back(session);
-        }
-        return is;
+        return in;
     };
 
 
 };
-
-
-// initial should be 2**k
-//initail = n;
-//we need other n-1 sessions to the final
-
-
-
