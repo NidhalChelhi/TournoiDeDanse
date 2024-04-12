@@ -9,22 +9,22 @@ using namespace std;
 #include "Adresse.h"
 
 class Personne {
+
 private:
     int cin;
     string nom;
     string prenom;
     vector<Adresse *> adresses;
+
 public:
 
-    // Const(s) & Dest
-    Personne();
+    Personne(int cin, string nom, string prenom);  // Protected constructor
 
-    Personne(int cin, string nom, string prenom);
+    Personne();  // Protected constructor
 
-    Personne(const Personne &);
+    Personne(const Personne &p);  // Protected constructor
 
-    ~Personne();
-
+    ~Personne();  // Protected constructor
 
     // Getters
     int getCin() { return cin; };

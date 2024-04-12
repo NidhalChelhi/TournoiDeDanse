@@ -39,7 +39,7 @@ public:
         while (sessions.size() < 2 * nbSessionsInital - 1) {
             Session *newSession = new Session(*sessions[i]->getGagnant(), *sessions[j]->getGagnant(),
                                               sessions[i]->getJuges(), sessions[i]->getCriteres());
-           sessions.push_back(newSession);
+            sessions.push_back(newSession);
             i = i + 2;
             j = j + 2;
         };
@@ -61,8 +61,6 @@ public:
             delete sessions[i];
         }
     };
-
-
 
 
     // Getters
@@ -99,15 +97,30 @@ public:
     };
 
     friend istream &operator>>(istream &in, Competition &competition) {
-        cout << "*** Saisie d'une competition ***" << endl;
+        cout << "******* Saisie d'une competition ******" << endl;
         in >> *competition.style;
         cout << "Nombre de sessions: ";
         in >> competition.nbSessionsInital;
         for (int i = 0; i < competition.nbSessionsInital; i++) {
+            cout << "*** Saisie de la session " << i + 1 << " ***" << endl;
             Session *session = new Session();
             in >> *session;
             competition.sessions.push_back(session);
         }
+        int i = 0;
+        int j = 1;
+
+
+        while (competition.sessions.size() < 2 * competition.nbSessionsInital - 1) {
+            Session *newSession = new Session(*competition.sessions[i]->getGagnant(),
+                                              *competition.sessions[j]->getGagnant(),
+                                              competition.sessions[i]->getJuges(),
+                                              competition.sessions[i]->getCriteres());
+
+            competition.sessions.push_back(newSession);
+            i = i + 2;
+            j = j + 2;
+        };
         return in;
     };
 

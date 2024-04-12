@@ -106,6 +106,8 @@ istream &operator>>(istream &in, Session &s) {
         cout << "Ajouter un autre critère? (o/n)";
         in >> rep1;
     } while (rep1 == 'o');
+    s.determinerGagnant();
+
     return in;
 }
 

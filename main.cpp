@@ -58,10 +58,13 @@ int main() {
     Session session4 = Session(d7, d8, {&j4}, {&c1, &c2, &c3});
 
 
+//   Competition c = Competition(&s1, 4, {&session1, &session2, &session3, &session4});
     Competition c;
-    Session ss;
 
-    cin >> ss;
-    cout << ss << endl;
-    return 0;
+    cin >> c;
+
+    cout << c << endl;
+
+
+    system("pause");
 }
