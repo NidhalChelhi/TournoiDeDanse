@@ -8,12 +8,12 @@ Juge::Juge() : Personne() {
 }
 
 Juge::Juge(
-        int cin,
+        int CIN,
         string nom,
         string prenom,
         int numJuge,
         int experience
-) : Personne(cin, nom, prenom) {
+) : Personne(CIN, nom, prenom) {
     this->experience = experience;
     this->numJuge = numJuge;
 }
@@ -47,17 +47,17 @@ istream &operator>>(istream &in, Juge &d) {
 }
 
 // Methodes
-int Juge::noterDanseur(Danseur &d, vector<Critere *> criteres) {
+void Juge::noterDanseur(Danseur &d, vector<Critere *> criteres) {
+    cout << "Noter " << d.getFullName() << ": (doit etre entre 0 et 10): " << endl;
     int performance = 0;
     for (int i = 0; i < criteres.size(); i++) {
-        int random_number = 1 + rand() % 100;
-        performance += criteres[i]->getCoefficient() * random_number;
+        int note = 0;
+        cout << criteres[i]->getLibelle() << "= ";
+        cin >> note;
+
+        performance += criteres[i]->getCoefficient() * note;
     }
-
-    d.addPerformance(performance);
-
-    return performance / criteres.size();
-
+    d.addPerformance((double) performance / criteres.size());
 }
 
 void Juge::afficher() {

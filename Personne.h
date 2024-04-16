@@ -12,14 +12,14 @@ class Personne {
 
 
 protected:
-    int cin;
+    int CIN;
     string nom;
     string prenom;
     vector<Adresse *> adresses;
 
 public:
 
-    Personne(int cin, string nom, string prenom);
+    Personne(int CIN, string nom, string prenom);
 
     Personne();
 
@@ -28,7 +28,7 @@ public:
     ~Personne();
 
     // Getters
-    int getCin() { return cin; };
+    int getCIN() { return CIN; };
 
     string getNom() { return nom; };
 
@@ -39,8 +39,8 @@ public:
     vector<Adresse *> getAdresses() { return adresses; };
 
     // Setters
-    void setCin(int cin) {
-        this->cin = cin;
+    void setCin(int CIN) {
+        this->CIN = CIN;
     };
 
     void setNom(string nom) {

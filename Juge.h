@@ -50,6 +50,6 @@ public:
 
 
     // Methodes
-    int noterDanseur(Danseur &d, vector<Critere *> criteres);
+    void noterDanseur(Danseur &d, vector<Critere *> criteres);
 
 };

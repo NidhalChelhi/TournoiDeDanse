@@ -3,21 +3,21 @@
 
 
 Personne::Personne() {
-    this->cin = 0;
+    this->CIN = 0;
     this->nom = "";
     this->prenom = "";
 
 }
 
-Personne::Personne(int cin, string nom, string prenom) {
-    this->cin = cin;
+Personne::Personne(int CIN, string nom, string prenom) {
+    this->CIN = CIN;
     this->nom = nom;
     this->prenom = prenom;
 
 }
 
 Personne::Personne(const Personne &p) {
-    this->cin = p.cin;
+    this->CIN = p.CIN;
     this->nom = p.nom;
     this->prenom = p.prenom;
     this->adresses = p.adresses;
@@ -34,7 +34,7 @@ Personne::~Personne() {
 
 void Personne::afficher() {
     cout << "CIN: ";
-    cout << cin << endl;
+    cout << CIN << endl;
     cout << "Nom Complet: ";
     cout << nom << " " << prenom << endl;
     cout << "Adresses: " << endl;
@@ -45,7 +45,7 @@ void Personne::afficher() {
 
 ostream &operator<<(ostream &out, Personne &p) {
     out << "CIN: ";
-    out << p.cin << endl;
+    out << p.CIN << endl;
     out << "Nom Complet: ";
     out << p.nom << " " << p.prenom << endl;
     out << "Adresses: " << endl;
@@ -59,20 +59,20 @@ ostream &operator<<(ostream &out, Personne &p) {
 
 istream &operator>>(istream &in, Personne &p) {
     cout << "CIN:";
-    in >> p.cin;
+    in >> p.CIN;
     cout << "Prénom:";
     in >> p.prenom;
     cout << "Nom:";
     in >> p.nom;
 
-    char rep;
-    do {
-        Adresse *adresse = new Adresse();
-        in >> *adresse;
-        p.adresses.push_back(adresse);
-        cout << "Ajouter une autre adresse? (o/n)";
-        in >> rep;
-    } while (rep == 'o');
+//    char rep;
+//    do {
+//        Adresse *adresse = new Adresse();
+//        in >> *adresse;
+//        p.adresses.push_back(adresse);
+//        cout << "Ajouter une autre adresse? (o/n)";
+//        in >> rep;
+//    } while (rep == 'o');
     return in;
 
 

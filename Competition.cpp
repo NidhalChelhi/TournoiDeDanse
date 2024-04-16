@@ -9,15 +9,15 @@ Competition::Competition() {
 Competition::Competition(Style *style, int nbSessionsInital, vector<Session *> initialSessions) {
     this->style = style;
     this->nbSessionsInital = nbSessionsInital;
+
     for (int i = 0; i < nbSessionsInital; i++) {
         sessions.push_back(new Session(*initialSessions[i]));
-
     }
     int i = 0;
     int j = 1;
     while (sessions.size() < 2 * nbSessionsInital - 1) {
-        Session *newSession = new Session(*sessions[i]->getGagnant(), *sessions[j]->getGagnant(),
-                                          sessions[i]->getJuges(), sessions[i]->getCriteres());
+        Session *newSession = new Session(sessions[i]->getGagnant(), sessions[j]->getGagnant(),
+                                          *sessions[i]->getJuge(), sessions[i]->getCriteres());
         sessions.push_back(newSession);
         i = i + 2;
         j = j + 2;
@@ -70,9 +70,9 @@ istream &operator>>(istream &in, Competition &competition) {
 
 
     while (competition.sessions.size() < 2 * competition.nbSessionsInital - 1) {
-        Session *newSession = new Session(*competition.sessions[i]->getGagnant(),
-                                          *competition.sessions[j]->getGagnant(),
-                                          competition.sessions[i]->getJuges(),
+        Session *newSession = new Session(competition.sessions[i]->getGagnant(),
+                                          competition.sessions[j]->getGagnant(),
+                                          *competition.sessions[i]->getJuge(),
                                           competition.sessions[i]->getCriteres());
 
         competition.sessions.push_back(newSession);

@@ -12,7 +12,7 @@ class Danseur : public Personne {
 private:
     int numDanseur;
     int age;
-    vector<int> performances;
+    vector<double> performances;
 
 
 public:
@@ -32,7 +32,7 @@ public:
 
     int getAge() { return age; };
 
-    vector<int> getPerformances() { return performances; };
+    vector<double> getPerformances() { return performances; };
 
 
     // Setters
@@ -44,7 +44,7 @@ public:
         this->age = age;
     };
 
-    void setPerformances(vector<int> performances) {
+    void setPerformances(vector<double> performances) {
         this->performances = performances;
     };
 
@@ -52,9 +52,11 @@ public:
 
     // Methodes
 
-    void addPerformance(int performance) {
+    void addPerformance(double performance) {
         this->performances.push_back(performance);
     }
+
+    Danseur operator<(Danseur &d) const;
 
 
     // Surcharge d'opérateurs

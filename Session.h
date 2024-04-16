@@ -11,17 +11,16 @@ class Session {
 private:
     Danseur *danseur1;
     Danseur *danseur2;
-    vector<Juge *> juges;
+    Juge *juge;
     vector<Critere *> criteres;
-
+    Danseur gagnant;
     static int nbSessions;
 public:
-    Danseur *gagnant;
 
     // const & dest
     Session();
 
-    Session(const Danseur &d1, const Danseur &d2, const vector<Juge *> &j, const vector<Critere *> &c);
+    Session(const Danseur &, const Danseur &, const Juge &, const vector<Critere *> &);
 
     Session(const Session &s);
 
@@ -32,23 +31,25 @@ public:
 
     Danseur *getDanseur2() { return danseur2; }
 
-    vector<Juge *> &getJuges() { return juges; }
+    Juge *getJuge() { return juge; }
 
     vector<Critere *> &getCriteres() { return criteres; }
 
-    Danseur *getGagnant() { return gagnant; }
+    Danseur getGagnant() { return gagnant; }
 
-    void setGagnant(Danseur *d) { gagnant = d; }
+    void setGagnant(Danseur d) { gagnant = d; }
 
     // Autres méthodes
-
     void determinerGagnant();
 
     // static method
     static int getNbSessions() { return nbSessions; }
 
 
+
     // Surcharge d'opérateurs
+
+
     friend ostream &operator<<(ostream &, Session &);
 
     friend istream &operator>>(istream &, Session &);

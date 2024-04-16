@@ -4,8 +4,7 @@
 Danseur::Danseur() : Personne() {
     numDanseur = 0;
     age = 0;
-    performances = {};
-
+    performances = vector<double>();
 }
 
 Danseur::Danseur(int cin, string nom, string prenom, int numDanseur, int age) : Personne(cin, nom, prenom) {
@@ -29,7 +28,7 @@ void Danseur::afficher() {
     cout << "Numéro de danseur: " << numDanseur << endl;
     cout << "Age: " << age << endl;
     cout << "Performances: ";
-    for (int i = 0; i < (int) performances.size(); i++) {
+    for (int i = 0; i < performances.size(); i++) {
         cout << performances[i] << " ";
     }
     cout << endl;
@@ -53,6 +52,17 @@ istream &operator>>(istream &in, Danseur &d) {
     cout << "Age: ";
     in >> d.age;
     return in;
+}
+
+Danseur Danseur::operator<(Danseur &d) const {
+    Danseur danseurGagnant;
+    if (this->performances.back() < d.performances.back()) {
+        danseurGagnant = d;
+    } else {
+        danseurGagnant = *this;
+
+    }
+    return danseurGagnant;
 }
 
 

@@ -16,7 +16,6 @@ Tournoi::Tournoi(string nom, Adresse *lieu, string date) {
     this->date = date;
     this->competitions = vector<Competition *>();
     this->resultat = new Resultat();
-    resultat->ajouterGagnant(competitions[0]->getSessions()[]);
 }
 
 Tournoi::~Tournoi() {
