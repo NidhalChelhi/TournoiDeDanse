@@ -7,7 +7,6 @@ using namespace std;
 
 class Adresse {
 private:
-
     string pays;
     string ville;
     string rue;
@@ -21,6 +20,7 @@ public:
 
     ~Adresse();
 
+
     // Getters
     string getPays() { return pays; }
 
@@ -28,7 +28,8 @@ public:
 
     string getRue() { return rue; }
 
-    int getCodePostal() { return codePostal; }
+    int getCodePostal() const { return codePostal; }
+
 
     // Setters
     void setPays(string pays) { this->pays = pays; }
@@ -38,9 +39,6 @@ public:
     void setRue(string rue) { this->rue = rue; }
 
     void setCodePostal(int codePostal) { this->codePostal = codePostal; }
-
-    // Methodes
-    void afficherAdresse();
 
 
     // Surcharge d'opérateurs

@@ -23,6 +23,18 @@ Danseur::~Danseur() {
     performances.clear();
 }
 
+// Methodes
+void Danseur::afficher() {
+    Personne::afficher();
+    cout << "Numéro de danseur: " << numDanseur << endl;
+    cout << "Age: " << age << endl;
+    cout << "Performances: ";
+    for (int i = 0; i < (int) performances.size(); i++) {
+        cout << performances[i] << " ";
+    }
+    cout << endl;
+}
+
 
 // Surcharge d'opérateurs
 ostream &operator<<(ostream &out, Danseur &d) {

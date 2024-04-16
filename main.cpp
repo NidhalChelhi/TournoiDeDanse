@@ -19,9 +19,6 @@ int main() {
     Adresse a1 = Adresse("Pays 1", "Ville 1", "Rue 1", 1234);
     Adresse a2 = Adresse("Pays 2", "Ville 2", "Rue 2", 5678);
 
-    // Test Personne
-    Personne p1 = Personne(123, "Doe", "John");
-    Personne p2 = Personne(456, "Smith", "Jane");
 
     // Test 8 Danseur
     Danseur d1 = Danseur(111, "1", "Player", 1111, 21);

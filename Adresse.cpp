@@ -1,6 +1,5 @@
 #include "Adresse.h"
 
-
 Adresse::Adresse() {
     this->pays = "";
     this->ville = "";
@@ -17,11 +16,6 @@ Adresse::Adresse(string pays, string ville, string rue, int codePostal) {
 
 Adresse::~Adresse() {
     // Destructor
-}
-
-void Adresse::afficherAdresse() {
-    cout << "Pays: " << pays << ", Ville: " << ville << ", Rue: " << rue << ", Code Postal: " << codePostal << endl;
-
 }
 
 ostream &operator<<(ostream &out, Adresse &a) {

@@ -10,7 +10,8 @@ using namespace std;
 
 class Personne {
 
-private:
+
+protected:
     int cin;
     string nom;
     string prenom;
@@ -18,13 +19,13 @@ private:
 
 public:
 
-    Personne(int cin, string nom, string prenom);  // Protected constructor
+    Personne(int cin, string nom, string prenom);
 
-    Personne();  // Protected constructor
+    Personne();
 
-    Personne(const Personne &p);  // Protected constructor
+    Personne(const Personne &p);
 
-    ~Personne();  // Protected constructor
+    ~Personne();
 
     // Getters
     int getCin() { return cin; };
@@ -36,6 +37,9 @@ public:
     string getFullName() { return prenom + " " + nom; };
 
     vector<Adresse *> getAdresses() { return adresses; };
+
+    // Pure Virtual method
+    virtual void afficher() = 0;
 
 
     // Setters
@@ -50,9 +54,6 @@ public:
     void setPrenom(string prenom) {
         this->prenom = prenom;
     };
-
-    // Methodes
-    void afficherDetails();
 
     // Surcharge d'opérateurs
     friend ostream &operator<<(ostream &, Personne &);

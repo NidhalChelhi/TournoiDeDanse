@@ -48,6 +48,7 @@ public:
         this->performances = performances;
     };
 
+    void afficher();
 
     // Methodes
 

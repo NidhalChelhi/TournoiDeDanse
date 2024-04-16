@@ -9,6 +9,8 @@ Session::Session() {
     juges = vector<Juge *>();
     criteres = vector<Critere *>();
 
+
+
 }
 
 Session::Session(const Danseur &d1, const Danseur &d2, const vector<Juge *> &j, const vector<Critere *> &c) {

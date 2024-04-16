@@ -6,12 +6,14 @@ Personne::Personne() {
     this->cin = 0;
     this->nom = "";
     this->prenom = "";
+
 }
 
 Personne::Personne(int cin, string nom, string prenom) {
     this->cin = cin;
     this->nom = nom;
     this->prenom = prenom;
+
 }
 
 Personne::Personne(const Personne &p) {
@@ -19,6 +21,7 @@ Personne::Personne(const Personne &p) {
     this->nom = p.nom;
     this->prenom = p.prenom;
     this->adresses = p.adresses;
+
 }
 
 Personne::~Personne() {
@@ -28,11 +31,15 @@ Personne::~Personne() {
     adresses.clear();
 }
 
-void Personne::afficherDetails() {
-    cout << "CIN: " << cin << ", Nom: " << nom << ", Prénom: " << prenom << endl;
+
+void Personne::afficher() {
+    cout << "CIN: ";
+    cout << cin << endl;
+    cout << "Nom Complet: ";
+    cout << nom << " " << prenom << endl;
     cout << "Adresses: " << endl;
-    for (Adresse *adresse: adresses) {
-        adresse->afficherAdresse();
+    for (int i = 0; i < (int) adresses.size(); i++) {
+        cout << i + 1 << ") " << *adresses[i];
     }
 }
 
@@ -70,3 +77,5 @@ istream &operator>>(istream &in, Personne &p) {
 
 
 }
+
+

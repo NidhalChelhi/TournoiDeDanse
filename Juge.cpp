@@ -59,3 +59,10 @@ int Juge::noterDanseur(Danseur &d, vector<Critere *> criteres) {
     return performance / criteres.size();
 
 }
+
+void Juge::afficher() {
+    cout << "Juge: " << endl;
+    Personne::afficher();
+    cout << "Numéro de juge: " << numJuge << endl;
+    cout << "Expérience: " << experience << endl;
+}

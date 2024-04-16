@@ -8,10 +8,13 @@ using namespace std;
 
 
 class Session {
+private:
     Danseur *danseur1;
     Danseur *danseur2;
     vector<Juge *> juges;
     vector<Critere *> criteres;
+
+    static int nbSessions;
 public:
     Danseur *gagnant;
 
@@ -40,6 +43,9 @@ public:
     // Autres méthodes
 
     void determinerGagnant();
+
+    // static method
+    static int getNbSessions() { return nbSessions; }
 
 
     // Surcharge d'opérateurs

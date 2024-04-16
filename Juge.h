@@ -41,6 +41,8 @@ public:
     };
 
 
+    void afficher();
+
     // Surcharge d'opérateurs
     friend ostream &operator<<(ostream &, Juge &);
 

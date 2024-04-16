@@ -20,4 +20,10 @@ add_executable(TournoiDeDanse main.cpp
         Session.h
         Critere.cpp
         Critere.h
+        Salle.h
+        Salle.cpp
+        Resultat.h
+        Resultat.cpp
+        Tournoi.cpp
+        Tournoi.h
 )
