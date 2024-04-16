@@ -38,10 +38,6 @@ public:
 
     vector<Adresse *> getAdresses() { return adresses; };
 
-    // Pure Virtual method
-    virtual void afficher() = 0;
-
-
     // Setters
     void setCin(int cin) {
         this->cin = cin;
@@ -54,6 +50,10 @@ public:
     void setPrenom(string prenom) {
         this->prenom = prenom;
     };
+
+
+    // Pure Virtual method
+    virtual void afficher() = 0;
 
     // Surcharge d'opérateurs
     friend ostream &operator<<(ostream &, Personne &);
