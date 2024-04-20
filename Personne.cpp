@@ -1,37 +1,32 @@
 #include "Personne.h"
 #include "Adresse.h"
 
-
+int Personne::nbPersonnes = 0;
 Personne::Personne() {
     this->CIN = 0;
     this->nom = "";
     this->prenom = "";
-
+    nbPersonnes++;
 }
-
 Personne::Personne(int CIN, string nom, string prenom) {
     this->CIN = CIN;
     this->nom = nom;
     this->prenom = prenom;
-
+    nbPersonnes++;
 }
-
 Personne::Personne(const Personne &p) {
     this->CIN = p.CIN;
     this->nom = p.nom;
     this->prenom = p.prenom;
     this->adresses = p.adresses;
-
+    nbPersonnes++;
 }
-
 Personne::~Personne() {
     for (Adresse *adresse: adresses) {
         delete adresse;
     };
     adresses.clear();
 }
-
-
 void Personne::afficher() {
     cout << "CIN: ";
     cout << CIN << endl;
@@ -42,7 +37,6 @@ void Personne::afficher() {
         cout << i + 1 << ") " << *adresses[i];
     }
 }
-
 ostream &operator<<(ostream &out, Personne &p) {
     out << "CIN: ";
     out << p.CIN << endl;
@@ -53,29 +47,29 @@ ostream &operator<<(ostream &out, Personne &p) {
         out << i + 1 << ") " << *p.adresses[i];
     }
     return out;
-
-
 }
 
 istream &operator>>(istream &in, Personne &p) {
     cout << "CIN:";
     in >> p.CIN;
-    cout << "Prénom:";
+    cout << "Prenom:";
     in >> p.prenom;
     cout << "Nom:";
     in >> p.nom;
-
-//    char rep;
-//    do {
-//        Adresse *adresse = new Adresse();
-//        in >> *adresse;
-//        p.adresses.push_back(adresse);
-//        cout << "Ajouter une autre adresse? (o/n)";
-//        in >> rep;
-//    } while (rep == 'o');
+    char rep;
+    do {
+        Adresse *adresse = new Adresse();
+        in >> *adresse;
+        p.adresses.push_back(adresse);
+       cout << "Ajouter une autre adresse? (o/n)";
+        in >> rep;
+    } while (rep == 'o'|| rep=='O');
+    Personne::nbPersonnes++;
     return in;
+}
 
-
+void Personne::estCompetant() {
+    cout<<"Je suis simple spectateur :)"<<endl;
 }
 
 

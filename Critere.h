@@ -12,11 +12,9 @@ private:
 
 public:
     Critere();
-
     Critere(string libelle, int coefficient);
-
+    Critere(const Critere &c);
     ~Critere();
-
     string getLibelle() { return libelle; };
 
     int getCoefficient() { return coefficient; };

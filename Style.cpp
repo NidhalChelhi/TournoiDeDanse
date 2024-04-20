@@ -7,8 +7,6 @@ Style::Style() {
     this->ageMin = 0;
     this->ageMax = 0;
     this->niveau = "";
-
-
 }
 
 Style::Style(string nom, int ageMin, int ageMax, string niveau) {
@@ -21,7 +19,12 @@ Style::Style(string nom, int ageMin, int ageMax, string niveau) {
 Style::~Style() {
     // Destructor
 }
-
+Style::Style(const Style& other) {
+    this->nom = other.nom;
+    this->ageMin = other.ageMin;
+    this->ageMax = other.ageMax;
+    this->niveau = other.niveau;
+}
 ostream &operator<<(ostream &out, Style &style) {
     out << "Nom: " << style.nom << ", Age min: " << style.ageMin << ", Age max: " << style.ageMax << ", Niveau: "
         << style.niveau << endl;
@@ -41,7 +44,6 @@ istream &operator>>(istream &in, Style &style) {
             cout << "L'age minimum doit être inférieur à l'age maximum" << endl;
         }
     } while (style.ageMin > style.ageMax);
-    //
     do {
         cout << "Niveau (EASY, MEDIUM, HARD): ";
         in >> style.niveau;
@@ -51,7 +53,6 @@ istream &operator>>(istream &in, Style &style) {
             cout << "Le niveau doit être l'un des suivants: EASY, MEDIUM, HARD" << endl;
         }
     } while (style.niveau != "EASY" && style.niveau != "MEDIUM" && style.niveau != "HARD");
-
     return in;
 }
 

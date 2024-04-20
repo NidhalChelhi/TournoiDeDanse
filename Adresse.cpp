@@ -25,7 +25,7 @@ ostream &operator<<(ostream &out, Adresse &a) {
 }
 
 istream &operator>>(istream &in, Adresse &a) {
-    cout << "Saisie d'une adresse: ";
+    cout << "__Saisie d'une adresse__ \n";
     cout << "Pays: ";
     in >> a.pays;
     cout << "Ville: ";

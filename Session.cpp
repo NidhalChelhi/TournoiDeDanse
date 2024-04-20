@@ -1,15 +1,11 @@
 #include "Session.h"
-
-
 Session::Session() {
     danseur1 = new Danseur();
     danseur2 = new Danseur();
     gagnant = Danseur();
     juge = new Juge();
-    criteres = vector<Critere *>();
 }
-
-Session::Session(const Danseur &d1, const Danseur &d2, const Juge &j, const vector<Critere *> &c) {
+Session::Session(const Danseur &d1, const Danseur &d2, const Juge &j,  vector<Critere *> &c) {
     danseur1 = new Danseur(d1);
     danseur2 = new Danseur(d2);
     juge = new Juge(j);
@@ -18,31 +14,40 @@ Session::Session(const Danseur &d1, const Danseur &d2, const Juge &j, const vect
     }
     determinerGagnant();
 }
-
 Session::Session(const Session &s) {
     danseur1 = new Danseur(*s.danseur1);
     danseur2 = new Danseur(*s.danseur2);
     juge = new Juge(*s.juge);
-    for (Critere *critere: s.criteres) {
-        criteres.push_back(new Critere(*critere));
+    for (int i = 0; i < s.criteres.size(); i++) {
+        criteres.push_back(new Critere(*s.criteres[i]));
     }
     gagnant = Danseur(s.gagnant);
 }
-
 Session::~Session() {
     delete danseur1;
     delete danseur2;
     delete juge;
-    for (Critere *critere: criteres) {
-        delete critere;
+    for (int i = 0; i < criteres.size(); i++) {
+        delete criteres[i];
+
     }
     criteres.clear();
 }
+void Session::noterDanseur(Danseur &d) {
+    cout << "Noter " << d.getFullName() << ": (doit etre entre 0 et 10): " << endl;
+    int performance = 0;
+    for (int i = 0; i < criteres.size(); i++) {
+        int note = 0;
+        cout << criteres[i]->getLibelle() << "= ";
+        cin >> note;
+        performance += criteres[i]->getCoefficient() * note;
+    }
+    d.addPerformance((double) performance / criteres.size());
 
-
+}
 void Session::determinerGagnant() {
-    juge->noterDanseur(*danseur1, criteres);
-    juge->noterDanseur(*danseur2, criteres);
+    noterDanseur(*danseur1);
+    noterDanseur(*danseur2);
     Danseur d = *danseur1 < *danseur2;
     setGagnant(d);
 };
@@ -75,20 +80,21 @@ istream &operator>>(istream &in, Session &s) {
     cout << "Entrez le danseur 2: " << endl;
     in >> *s.danseur2;
     cout << "Entrez le juge: " << endl;
+    s.juge = new Juge();
     in >> *s.juge;
-
     char rep;
     do {
-        cout << "Entrez un critère: " << endl;
+        cout << "Entrez un critere: " << endl;
         Critere *critere = new Critere();
         in >> *critere;
         s.criteres.push_back(critere);
-        cout << "Ajouter un autre critère? (o/n)";
+        cout << "Ajouter un autre critere? (o/n)";
         in >> rep;
     } while (rep == 'o' || rep == 'O');
     s.determinerGagnant();
     return in;
 }
+
 
 
 

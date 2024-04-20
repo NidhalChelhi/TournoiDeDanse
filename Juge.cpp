@@ -1,5 +1,5 @@
 #include "Juge.h"
-#include <cstdlib>
+//#include <cstdlib>
 
 // Const(s) & Dest
 Juge::Juge() : Personne() {
@@ -31,38 +31,46 @@ Juge::~Juge() {
 ostream &operator<<(ostream &out, Juge &d) {
     Personne *p = &d;
     out << *p;
-    out << "Numéro de juge: " << d.numJuge << endl;
-    out << "Expérience: " << d.experience << endl;
+    out << "Numero de juge: " << d.numJuge << endl;
+    out << "Experience: " << d.experience << endl;
     return out;
 }
 
 istream &operator>>(istream &in, Juge &d) {
     Personne *p = &d;
     in >> *p;
-    cout << "Numéro de juge: ";
+    cout << "Numero de juge: ";
     in >> d.numJuge;
-    cout << "Expérience: ";
+    cout << "Experience: ";
     in >> d.experience;
     return in;
 }
 
 // Methodes
-void Juge::noterDanseur(Danseur &d, vector<Critere *> criteres) {
+/*void Juge::noterDanseur(Danseur &d, vector<Critere *> criteres) {
     cout << "Noter " << d.getFullName() << ": (doit etre entre 0 et 10): " << endl;
     int performance = 0;
     for (int i = 0; i < criteres.size(); i++) {
         int note = 0;
         cout << criteres[i]->getLibelle() << "= ";
         cin >> note;
-
         performance += criteres[i]->getCoefficient() * note;
     }
     d.addPerformance((double) performance / criteres.size());
-}
+
+}*/
 
 void Juge::afficher() {
     cout << "Juge: " << endl;
     Personne::afficher();
-    cout << "Numéro de juge: " << numJuge << endl;
-    cout << "Expérience: " << experience << endl;
+    cout << "Numero de juge: " << numJuge << endl;
+    cout << "Experience: " << experience << endl;
+}
+
+void Juge::estCompetant() {
+    if (experience >= 4){
+        cout<<"Ce juge est professionnel "<<endl;
+    } else{
+        cout<<"Ce juge est au debut de carrier "<<endl;
+    }
 }

@@ -6,38 +6,53 @@
 #include "Critere.h"
 #include "Style.h"
 #include "Session.h"
-
+#include "Tournoi.h"
 #include "Competition.h"
 
 using namespace std;
 
 
 int main() {
+    // Test Tournoi
+    /*Tournoi t1;
+    cin>>t1;
+    cout<<t1;*/
+    Competition c1;
+    cin>>c1;
+    cout<<c1;
+    /*// Test  Danseur
+    Danseur d1 ;
+    cin>>d1;
+    cout<<d1;
+    cout<<"--------------------"<<endl;
+    Danseur d2 = Danseur(123, "1", "Danseur", 1234, 25);
+    cout<<d2;*/
 
-    // Test Adresse
-    Adresse a1 = Adresse("Pays 1", "Ville 1", "Rue 1", 1234);
-    Adresse a2 = Adresse("Pays 2", "Ville 2", "Rue 2", 5678);
-
-
-    // Test 8 Danseur
-    Danseur d1 = Danseur(111, "1", "Player", 1111, 21);
-    Danseur d2 = Danseur(222, "2", "Player", 2222, 25);
-    Danseur d3 = Danseur(333, "3", "Player", 3333, 21);
-    Danseur d4 = Danseur(444, "4", "Player", 4444, 25);
-
-
+    /*// Test Adresse
+    Adresse a1;
+    cin>>a1;
+    cout<<a1;
+    cout<<"--------------------"<<endl;
+    Adresse a2 = Adresse("Rue 1", "Ville 1", "Pays 1", 1234);
+    cout<<a2;
 
     // Test Juge
-    Juge j1 = Juge(132, "1", "Juge", 1659, 21);
+    Juge j1 ;
+    cin>>j1;
+    cout<<j1;
+    cout<<"--------------------"<<endl;
     Juge j2 = Juge(456, "2", "Juge", 1234, 25);
-
+    cout<<j2;
     // Test Critere
-    Critere c1 = Critere("Technique", 10);
-    Critere c2 = Critere("Style", 20);
-    Critere c3 = Critere("Synchronisation", 30);
+    Critere c1 = Critere("Critere 1", 10);
+    cout<<c1;
+    cout<<"--------------------"<<endl;
+    Critere c2 ;
+    cin>>c2;
+    cout<<c2;
+*/
 
-
-    // Test Style
+    /*// Test Style
     Style s1 = Style("Hip Hop", 10, 20, "easy");
 
     // Test Session
@@ -48,8 +63,9 @@ int main() {
     Competition c = Competition(&s1, 2, {&session1, &session2});
 
 
-    cout << c << endl;
+    cout << c << endl;*/
 
 
     system("pause");
+    return 0;
 }

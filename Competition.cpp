@@ -1,8 +1,7 @@
 #include "Competition.h"
 
-
 Competition::Competition() {
-    style = new Style();
+    style =new Style();
     nbSessionsInital = 0;
 };
 
@@ -33,10 +32,11 @@ Competition::Competition(const Competition &competition) {
 };
 
 Competition::~Competition() {
-    delete style;
     for (int i = 0; i < sessions.size(); i++) {
         delete sessions[i];
     }
+    sessions.clear();
+    delete style;
 }
 
 ostream &operator<<(ostream &out, const Competition &competition) {
@@ -57,18 +57,17 @@ istream &operator>>(istream &in, Competition &competition) {
     cout << "******* Saisie d'une competition ******" << endl;
     in >> *competition.style;
     cout << "Nombre de sessions: ";
-
     in >> competition.nbSessionsInital;
     for (int i = 0; i < competition.nbSessionsInital; i++) {
         cout << "*** Saisie de la session " << i + 1 << " ***" << endl;
         Session *session = new Session();
         in >> *session;
         competition.sessions.push_back(session);
+        cout<<444+1<<endl;
     }
-    int i = 0;
+
+    /*int i = 0;
     int j = 1;
-
-
     while (competition.sessions.size() < 2 * competition.nbSessionsInital - 1) {
         Session *newSession = new Session(competition.sessions[i]->getGagnant(),
                                           competition.sessions[j]->getGagnant(),
@@ -78,7 +77,7 @@ istream &operator>>(istream &in, Competition &competition) {
         competition.sessions.push_back(newSession);
         i = i + 2;
         j = j + 2;
-    };
+    };*/
     return in;
 };
 
