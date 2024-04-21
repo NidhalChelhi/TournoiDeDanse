@@ -8,8 +8,6 @@ Style::Style() {
     this->ageMin = 0;
     this->ageMax = 0;
     this->niveau = "";
-
-
 }
 
 Style::Style(int id, string nom, int ageMin, int ageMax, string niveau) {
@@ -20,9 +18,7 @@ Style::Style(int id, string nom, int ageMin, int ageMax, string niveau) {
     this->niveau = niveau;
 }
 
-Style::~Style() {
-    // Destructor
-}
+Style::~Style() {}
 
 ostream &operator<<(ostream &out, Style &style) {
     out << "ID: " << style.id << endl;
@@ -60,5 +56,24 @@ istream &operator>>(istream &in, Style &style) {
     } while (style.niveau != "EASY" && style.niveau != "MEDIUM" && style.niveau != "HARD");
 
     return in;
+}
+
+Style &Style::operator=(const Style &other) {
+    if (this != &other) {
+        this->id = other.id;
+        this->nom = other.nom;
+        this->ageMin = other.ageMin;
+        this->ageMax = other.ageMax;
+        this->niveau = other.niveau;
+    }
+    return *this;
+}
+
+bool Style::operator<(const Style &other) const {
+    return this->id < other.id;
+}
+
+bool Style::operator==(const Style &other) const {
+    return this->id == other.id;
 }
 

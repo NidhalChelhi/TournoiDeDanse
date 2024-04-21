@@ -4,7 +4,6 @@
 
 using namespace std;
 
-
 class Resultat {
 
 private:
@@ -12,22 +11,21 @@ private:
 
 public:
 
-        Resultat();
+    Resultat();
 
-        Resultat(vector<Danseur> gagnants);
+    Resultat(vector<Danseur> gagnants);
 
-        ~Resultat();
+    ~Resultat();
 
-        vector<Danseur> &getGagnants();
+    vector<Danseur> &getGagnants();
 
-        void setGagnants(vector<Danseur> &gagnants);
+    void setGagnants(vector<Danseur> &gagnants);
 
-        void ajouterGagnant(Danseur gagnant);
+    void ajouterGagnant(Danseur gagnant);
 
-        friend ostream &operator<<(ostream &os, Resultat resultat);
+    friend ostream &operator<<(ostream &os, Resultat resultat);
 
-        friend istream &operator>>(istream &in, Resultat &resultat);
-
+    friend istream &operator>>(istream &in, Resultat &resultat);
 
 };
 

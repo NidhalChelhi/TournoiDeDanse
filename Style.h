@@ -10,69 +10,54 @@ using namespace std;
 class Style {
 
 private:
-    int id;
-    string nom;
-    int ageMin;
-    int ageMax;
-    string niveau;
+int id;
+string nom;
+int ageMin;
+int ageMax;
+string niveau;
 public:
 
-    // Const(s) & Dest
-    Style();
+// Const(s) & Dest
+Style();
 
-    Style(int id, string nom, int ageMin, int ageMax, string niveau);
+Style(int id, string nom, int ageMin, int ageMax, string niveau);
 
-    ~Style();
+~Style();
 
-    // Getters
-    int getId() { return id; };
+// Getters
+int getId() { return id; };
 
-    string getNom() { return nom; };
+string getNom() { return nom; };
 
-    int getAgeMin() { return ageMin; };
+int getAgeMin() { return ageMin; };
 
-    int getAgeMax() { return ageMax; };
+int getAgeMax() { return ageMax; };
 
-    string getNiveau() { return niveau; };
-
-
-    // Setters
-    void setId(int id) { this->id = id; };
-
-    void setNom(string nom) { this->nom = nom; };
-
-    void setAgeMin(int ageMin) { this->ageMin = ageMin; };
-
-    void setAgeMax(int ageMax) { this->ageMax = ageMax; };
-
-    void setNiveau(string niveau) { this->niveau = niveau; };
+string getNiveau() { return niveau; };
 
 
-    // Surcharge d'opérateurs
-    friend ostream &operator<<(ostream &, Style &);
+// Setters
+void setId(int id) { this->id = id; };
 
-    friend istream &operator>>(istream &, Style &);
+void setNom(string nom) { this->nom = nom; };
 
-    bool operator<(const Style &other) const {
-        return this->id < other.id;
-    }
+void setAgeMin(int ageMin) { this->ageMin = ageMin; };
 
-    bool operator==(const Style &other) const {
-        return this->id == other.id;
-    }
+void setAgeMax(int ageMax) { this->ageMax = ageMax; };
 
-    // overload operator =
-    Style &operator=(const Style &other) {
+void setNiveau(string niveau) { this->niveau = niveau; };
 
-        if (this != &other) {
-            this->id = other.id;
-            this->nom = other.nom;
-            this->ageMin = other.ageMin;
-            this->ageMax = other.ageMax;
-            this->niveau = other.niveau;
-        }
-        return *this;
-    }
+
+// Surcharge d'opérateurs
+friend ostream &operator<<(ostream &, Style &);
+
+friend istream &operator>>(istream &, Style &);
+
+bool operator<(const Style &other) const;
+
+bool operator==(const Style &other) const;
+
+Style &operator=(const Style &other);
 
 };
 
