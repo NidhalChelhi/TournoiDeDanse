@@ -34,6 +34,20 @@ void Danseur::afficher() {
     cout << endl;
 }
 
+void Danseur::addPerformance(double performance) {
+    this->performances.push_back(performance);
+}
+
+Danseur Danseur::operator<(Danseur &d) const {
+    Danseur danseurGagnant;
+    if (this->performances.back() < d.performances.back()) {
+        danseurGagnant = d;
+    } else {
+        danseurGagnant = *this;
+
+    }
+    return danseurGagnant;
+}
 
 // Surcharge d'opérateurs
 ostream &operator<<(ostream &out, Danseur &d) {
@@ -53,18 +67,3 @@ istream &operator>>(istream &in, Danseur &d) {
     in >> d.age;
     return in;
 }
-
-Danseur Danseur::operator<(Danseur &d) const {
-    Danseur danseurGagnant;
-    if (this->performances.back() < d.performances.back()) {
-        danseurGagnant = d;
-    } else {
-        danseurGagnant = *this;
-
-    }
-    return danseurGagnant;
-}
-
-
-
-

@@ -71,20 +71,23 @@ istream &operator>>(istream &in, Personne &p) {
     in >> p.prenom;
     cout << "Nom:";
     in >> p.nom;
-
-//    char rep;
-//    do {
-//        Adresse *adresse = new Adresse();
-//        in >> *adresse;
-//        p.adresses.push_back(adresse);
-//        cout << "Ajouter une autre adresse? (o/n)";
-//        in >> rep;
-//    } while (rep == 'o');
+    char rep;
+    do {
+        Adresse *adresse = new Adresse();
+        in >> *adresse;
+        p.adresses.push_back(adresse);
+        cout << "Ajouter une autre adresse? (o/n)";
+        in >> rep;
+    } while (rep == 'o');
     Personne::nbPersonnes++;
 
     return in;
 
 
 }
+
+int Personne::getNbPersonnes() { return nbPersonnes; }
+
+void Personne::displayNbPersonnes() { cout << "Nombre de Personnes: " << nbPersonnes << endl; }
 
 

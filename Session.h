@@ -2,6 +2,7 @@
 
 #include "Juge.h"
 #include "Danseur.h"
+#include "Salle.h"
 #include <vector>
 
 using namespace std;
@@ -12,15 +13,15 @@ private:
     Danseur *danseur1;
     Danseur *danseur2;
     Juge *juge;
+    Salle *salle;
     vector<Critere *> criteres;
     Danseur gagnant;
-    static int nbSessions;
 public:
 
     // const & dest
     Session();
 
-    Session(const Danseur &, const Danseur &, const Juge &, const vector<Critere *> &);
+    Session(const Danseur &, const Danseur &, const Juge &, const Salle &, const vector<Critere *> &);
 
     Session(const Session &s);
 
@@ -33,6 +34,8 @@ public:
 
     Juge *getJuge() { return juge; }
 
+    Salle *getSalle() { return salle; }
+
     vector<Critere *> &getCriteres() { return criteres; }
 
     Danseur getGagnant() { return gagnant; }
@@ -42,14 +45,7 @@ public:
     // Autres méthodes
     void determinerGagnant();
 
-    // static method
-    static int getNbSessions() { return nbSessions; }
-
-
-
     // Surcharge d'opérateurs
-
-
     friend ostream &operator<<(ostream &, Session &);
 
     friend istream &operator>>(istream &, Session &);

@@ -1,6 +1,5 @@
 #include "Competition.h"
 
-
 Competition::Competition() {
     nbSessionsInital = 0;
 };
@@ -15,7 +14,8 @@ Competition::Competition(int nbSessionsInital, vector<Session *> initialSessions
     int j = 1;
     while (sessions.size() < 2 * nbSessionsInital - 1) {
         Session *newSession = new Session(sessions[i]->getGagnant(), sessions[j]->getGagnant(),
-                                          *sessions[i]->getJuge(), sessions[i]->getCriteres());
+                                          *sessions[i]->getJuge(), *sessions[i]->getSalle(),
+                                          sessions[i]->getCriteres());
         sessions.push_back(newSession);
         i = i + 2;
         j = j + 2;
@@ -34,45 +34,6 @@ Competition::~Competition() {
     for (int i = 0; i < sessions.size(); i++) {
         delete sessions[i];
     }
-}
-
-ostream &operator<<(ostream &out, const Competition &competition) {
-    for (int i = 0; i < competition.sessions.size(); i++) {
-        if (i == competition.sessions.size() - 1) {
-            out << "**************** Finale ****************" << endl;
-        } else {
-            out << "**************** Session " << i + 1 << " ****************" << endl;
-        }
-
-        out << *competition.sessions[i] << endl;
-    }
-    return out;
-}
-
-istream &operator>>(istream &in, Competition &competition) {
-    cout << "Nombre de sessions: ";
-    in >> competition.nbSessionsInital;
-    for (int i = 0; i < competition.nbSessionsInital; i++) {
-        cout << "*** Saisie de la session " << i + 1 << " ***" << endl;
-        Session *session = new Session();
-        in >> *session;
-        competition.sessions.push_back(session);
-    }
-    int i = 0;
-    int j = 1;
-
-
-    while (competition.sessions.size() < 2 * competition.nbSessionsInital - 1) {
-        Session *newSession = new Session(competition.sessions[i]->getGagnant(),
-                                          competition.sessions[j]->getGagnant(),
-                                          *competition.sessions[i]->getJuge(),
-                                          competition.sessions[i]->getCriteres());
-
-        competition.sessions.push_back(newSession);
-        i = i + 2;
-        j = j + 2;
-    };
-    return in;
 }
 
 void Competition::affichageSpecial() {
@@ -99,3 +60,51 @@ void Competition::affichageSpecial() {
 };
 
 
+ostream &operator<<(ostream &out, const Competition &competition) {
+    for (int i = 0; i < competition.sessions.size(); i++) {
+        if (i == competition.sessions.size() - 1) {
+            out << "**************** Finale ****************" << endl;
+        } else {
+            out << "**************** Session " << i + 1 << " ****************" << endl;
+        }
+
+        out << *competition.sessions[i] << endl;
+    }
+    return out;
+}
+
+bool isPowerOfTwo(int num) {
+    return (num > 0) && ((num & (num - 1)) == 0);
+}
+
+istream &operator>>(istream &in, Competition &competition) {
+    cout << "Nombre de sessions: ";
+    in >> competition.nbSessionsInital;
+    while (!isPowerOfTwo(competition.nbSessionsInital)) {
+        std::cout << "Entrée invalide. Veuillez entrer une puissance de 2 : ";
+        cin >> competition.nbSessionsInital;
+    }
+
+    for (int i = 0; i < competition.nbSessionsInital; i++) {
+        cout << "*** Saisie de la session " << i + 1 << " ***" << endl;
+        Session *session = new Session();
+        in >> *session;
+        competition.sessions.push_back(session);
+    }
+    int i = 0;
+    int j = 1;
+
+
+    while (competition.sessions.size() < 2 * competition.nbSessionsInital - 1) {
+        Session *newSession = new Session(competition.sessions[i]->getGagnant(),
+                                          competition.sessions[j]->getGagnant(),
+                                          *competition.sessions[i]->getJuge(),
+                                          *competition.sessions[i]->getSalle(),
+                                          competition.sessions[i]->getCriteres());
+
+        competition.sessions.push_back(newSession);
+        i = i + 2;
+        j = j + 2;
+    };
+    return in;
+}

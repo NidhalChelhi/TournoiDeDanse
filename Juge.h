@@ -16,7 +16,6 @@ private:
     int experience;
 
 public:
-
     // Const(s) & Dest
     Juge();
 
@@ -40,6 +39,8 @@ public:
         this->experience = experience;
     };
 
+    // Methodes
+    void noterDanseur(Danseur &d, vector<Critere *> criteres);
 
     void afficher();
 
@@ -47,9 +48,4 @@ public:
     friend ostream &operator<<(ostream &, Juge &);
 
     friend istream &operator>>(istream &, Juge &);
-
-
-    // Methodes
-    void noterDanseur(Danseur &d, vector<Critere *> criteres);
-
 };

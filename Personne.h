@@ -19,10 +19,9 @@ protected:
     static int nbPersonnes;
 
 public:
+    Personne();
 
     Personne(int CIN, string nom, string prenom);
-
-    Personne();
 
     Personne(const Personne &p);
 
@@ -57,9 +56,9 @@ public:
     virtual void afficher() = 0;
 
     // static Method
-    static int getNbPersonnes() { return nbPersonnes; };
+    static int getNbPersonnes();
 
-    static void displayNbPersonnes() { cout << "Nombre de Personnes: " << nbPersonnes << endl; };
+    static void displayNbPersonnes();
 
     // Surcharge d'opérateurs
     friend ostream &operator<<(ostream &, Personne &);

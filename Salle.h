@@ -9,34 +9,33 @@ using namespace std;
 
 class Salle {
 private:
-    string nom;
-    int capacite;
-
+string nom;
+int capacite;
 
 public:
-    // Const(s) & Dest
-    Salle();
+// Const(s) & Dest
+Salle();
 
-    Salle(string nom, int capacite);
+Salle(string nom, int capacite);
 
-    ~Salle();
+~Salle();
 
-    // Getters
-    string getNom() { return nom; };
+// Getters
+string getNom() { return nom; };
 
-    int getCapacite() { return capacite; };
-
-
-    // Setters
-    void setNom(string nom) { this->nom = nom; };
-
-    void setCapacite(int capacite) { this->capacite = capacite; };
+int getCapacite() { return capacite; };
 
 
-    // Surcharge d'opérateurs
-    friend ostream &operator<<(ostream &, Salle &);
+// Setters
+void setNom(string nom) { this->nom = nom; };
 
-    friend istream &operator>>(istream &, Salle &);
+void setCapacite(int capacite) { this->capacite = capacite; };
+
+
+// Surcharge d'opérateurs
+friend ostream &operator<<(ostream &, Salle &);
+
+friend istream &operator>>(istream &, Salle &);
 
 };
 

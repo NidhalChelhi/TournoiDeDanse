@@ -16,37 +16,33 @@ private:
     vector<Session *> sessions;
 
 public:
-
-    // Constructeurs
+// Constructeurs & Destructeur
     Competition();
 
     Competition(int nbSessionsInital, vector<Session *> initialSessions);
 
     Competition(const Competition &competition);
 
-
-    // Destructeur
     ~Competition();
 
 
-    // Getters
+// Getters
     int getNbSessionsInital() const { return nbSessionsInital; };
 
     vector<Session *> getSessions() const { return sessions; };
 
-    // Méthodes
-
-    void affichageSpecial();
-    // Setters
-
+// Setters
     void setNbSessionsInital(int nbSessionsInital) { this->nbSessionsInital = nbSessionsInital; };
 
     void setSessions(vector<Session *> sessions) { this->sessions = sessions; };
 
 
-    // Surcharge d'opérateurs
-    friend ostream &operator<<(ostream &out, const Competition &competition);;
+// Méthodes
+    void affichageSpecial();
 
-    friend istream &operator>>(istream &in, Competition &competition);;
+// Surcharge d'opérateurs
+friend ostream &operator<<(ostream &out, const Competition &competition);
+
+friend istream &operator>>(istream &in, Competition &competition);
 
 };

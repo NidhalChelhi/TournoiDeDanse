@@ -6,13 +6,15 @@ Session::Session() {
     danseur2 = new Danseur();
     gagnant = Danseur();
     juge = new Juge();
+    salle = new Salle();
     criteres = vector<Critere *>();
 }
 
-Session::Session(const Danseur &d1, const Danseur &d2, const Juge &j, const vector<Critere *> &c) {
+Session::Session(const Danseur &d1, const Danseur &d2, const Juge &j, const Salle &s, const vector<Critere *> &c) {
     danseur1 = new Danseur(d1);
     danseur2 = new Danseur(d2);
     juge = new Juge(j);
+    salle = new Salle(s);
     for (Critere *critere: c) {
         criteres.push_back(critere);
     }
@@ -23,6 +25,7 @@ Session::Session(const Session &s) {
     danseur1 = new Danseur(*s.danseur1);
     danseur2 = new Danseur(*s.danseur2);
     juge = new Juge(*s.juge);
+    salle = new Salle(*s.salle);
     for (Critere *critere: s.criteres) {
         criteres.push_back(new Critere(*critere));
     }
@@ -33,6 +36,7 @@ Session::~Session() {
     delete danseur1;
     delete danseur2;
     delete juge;
+    delete salle;
     for (Critere *critere: criteres) {
         delete critere;
     }
@@ -48,6 +52,7 @@ void Session::determinerGagnant() {
 };
 
 ostream &operator<<(ostream &out, Session &s) {
+    out << "Salle : " << s.salle->getNom() << endl;
     out << "Juge : " << s.juge->getFullName() << endl;
     out << "Danseur 1: " << s.danseur1->getFullName() << endl;
     for (int i = 0; i < s.danseur1->getPerformances().size(); i++) {
@@ -59,7 +64,7 @@ ostream &operator<<(ostream &out, Session &s) {
         out << "s" << i + 1 << ": " << s.danseur2->getPerformances()[i] << "\t";
     };
     out << endl;
-    out << "############# GAGNANT: " << s.getGagnant().getFullName() << endl;
+    out << "##### GAGNANT: " << s.getGagnant().getFullName() << endl;
     for (int i = 0; i < s.gagnant.getPerformances().size(); i++) {
         out << "s" << i + 1 << ": " << s.getGagnant().getPerformances()[i] << "\t";
     };
@@ -76,6 +81,8 @@ istream &operator>>(istream &in, Session &s) {
     in >> *s.danseur2;
     cout << "Entrez le juge: " << endl;
     in >> *s.juge;
+    cout << "Entrez la salle: " << endl;
+    in >> *s.salle;
 
     char rep;
     do {

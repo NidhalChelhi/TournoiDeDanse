@@ -52,17 +52,13 @@ public:
 
     // Methodes
 
-    void addPerformance(double performance) {
-        this->performances.push_back(performance);
-    }
+    void addPerformance(double performance);
 
     Danseur operator<(Danseur &d) const;
-
 
     // Surcharge d'opérateurs
     friend ostream &operator<<(ostream &, Danseur &);
 
     friend istream &operator>>(istream &, Danseur &);
-
 
 };
