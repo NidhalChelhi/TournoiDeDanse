@@ -3,6 +3,7 @@
 #include <cctype> // for using toupper
 
 Style::Style() {
+    this->id = 0;
     this->nom = "";
     this->ageMin = 0;
     this->ageMax = 0;
@@ -11,7 +12,8 @@ Style::Style() {
 
 }
 
-Style::Style(string nom, int ageMin, int ageMax, string niveau) {
+Style::Style(int id, string nom, int ageMin, int ageMax, string niveau) {
+    this->id = id;
     this->nom = nom;
     this->ageMin = ageMin;
     this->ageMax = ageMax;
@@ -23,13 +25,18 @@ Style::~Style() {
 }
 
 ostream &operator<<(ostream &out, Style &style) {
-    out << "Nom: " << style.nom << ", Age min: " << style.ageMin << ", Age max: " << style.ageMax << ", Niveau: "
-        << style.niveau << endl;
+    out << "ID: " << style.id << endl;
+    out << "Nom: " << style.nom << endl;
+    out << "Age min: " << style.ageMin << endl;
+    out << "Age max: " << style.ageMax << endl;
+    out << "Niveau: " << style.niveau << endl;
     return out;
 }
 
 istream &operator>>(istream &in, Style &style) {
     cout << "Saisir les informations du style:" << endl;
+    cout << "ID du Style: ";
+    in >> style.id;
     cout << "Nom: ";
     in >> style.nom;
     do {
@@ -54,6 +61,4 @@ istream &operator>>(istream &in, Style &style) {
 
     return in;
 }
-
-
 

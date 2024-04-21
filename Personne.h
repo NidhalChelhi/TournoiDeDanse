@@ -16,6 +16,7 @@ protected:
     string nom;
     string prenom;
     vector<Adresse *> adresses;
+    static int nbPersonnes;
 
 public:
 
@@ -54,6 +55,11 @@ public:
 
     // Pure Virtual method
     virtual void afficher() = 0;
+
+    // static Method
+    static int getNbPersonnes() { return nbPersonnes; };
+
+    static void displayNbPersonnes() { cout << "Nombre de Personnes: " << nbPersonnes << endl; };
 
     // Surcharge d'opérateurs
     friend ostream &operator<<(ostream &, Personne &);

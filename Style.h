@@ -10,6 +10,7 @@ using namespace std;
 class Style {
 
 private:
+    int id;
     string nom;
     int ageMin;
     int ageMax;
@@ -19,11 +20,13 @@ public:
     // Const(s) & Dest
     Style();
 
-    Style(string nom, int ageMin, int ageMax, string niveau);
+    Style(int id, string nom, int ageMin, int ageMax, string niveau);
 
     ~Style();
 
     // Getters
+    int getId() { return id; };
+
     string getNom() { return nom; };
 
     int getAgeMin() { return ageMin; };
@@ -34,6 +37,8 @@ public:
 
 
     // Setters
+    void setId(int id) { this->id = id; };
+
     void setNom(string nom) { this->nom = nom; };
 
     void setAgeMin(int ageMin) { this->ageMin = ageMin; };
@@ -47,6 +52,27 @@ public:
     friend ostream &operator<<(ostream &, Style &);
 
     friend istream &operator>>(istream &, Style &);
+
+    bool operator<(const Style &other) const {
+        return this->id < other.id;
+    }
+
+    bool operator==(const Style &other) const {
+        return this->id == other.id;
+    }
+
+    // overload operator =
+    Style &operator=(const Style &other) {
+
+        if (this != &other) {
+            this->id = other.id;
+            this->nom = other.nom;
+            this->ageMin = other.ageMin;
+            this->ageMax = other.ageMax;
+            this->niveau = other.niveau;
+        }
+        return *this;
+    }
 
 };
 

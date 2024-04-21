@@ -2,6 +2,9 @@
 #include "Adresse.h"
 #include "Competition.h"
 #include "Resultat.h"
+#include<map>
+#include "Style.h"
+#include <algorithm>
 
 class Tournoi {
 
@@ -9,9 +12,8 @@ private:
     string nom;
     Adresse *lieu;
     string date;
-
-    vector<Competition *> competitions;
-    Resultat *resultat;
+    map<Style *, Competition *> competitions;
+    Resultat resultat;
 
 
 public:
@@ -19,36 +21,38 @@ public:
     // Constructors and destructors
     Tournoi();
 
-    Tournoi(string nom, Adresse *lieu, string date);
+    Tournoi(string nom, Adresse *lieu, string date, map<Style *, Competition *> competitions);
 
     ~Tournoi();
 
+    Tournoi(const Tournoi &tournoi);
+
     // Getters and setters
-    const string &getNom() const;
+    string &getNom();
 
-    void setNom(const string &nom);
+    string &getDate();
 
-    Adresse *getLieu() const;
+    Adresse *getLieu();
+
+    Resultat getResultat();
+
+    void setNom(string &nom);
+
+    void setDate(string &date);
 
     void setLieu(Adresse *lieu);
 
-    const string &getDate() const;
+    void setResultat(Resultat resultat);
 
-    void setDate(const string &date);
+    void setCompetitions(map<Style *, Competition *> competitions);
 
-    const vector<Competition *> &getCompetitions() const;
-
-    void setCompetitions(const vector<Competition *> &competitions);
-
-    Resultat *getResultat() const;
-
-    void setResultat(Resultat *resultat);
-
+    map<Style *, Competition *> getCompetitions();
 
     // Overloaded operators
-    friend ostream &operator<<(ostream &os, const Tournoi &tournoi);
+    friend ostream &operator<<(ostream &os, Tournoi &tournoi);
 
-    friend istream &operator>>(istream &is, Tournoi &tournoi);
+    friend istream &operator>>(istream &in, Tournoi &tournoi);
+
 
 };
 

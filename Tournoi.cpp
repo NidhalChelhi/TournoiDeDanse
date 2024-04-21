@@ -1,98 +1,129 @@
 #include "Tournoi.h"
+#include <map>
+#include <algorithm>
 
-
-// Constructors and destructors
 Tournoi::Tournoi() {
+
     this->nom = "";
-    this->lieu = new Adresse();
+    this->lieu = nullptr;
     this->date = "";
-    this->competitions = vector<Competition *>();
-    this->resultat = new Resultat();
+    map<Style *, Competition *> competitions;
+
 }
 
-Tournoi::Tournoi(string nom, Adresse *lieu, string date) {
+Tournoi::Tournoi(string nom, Adresse *lieu, string date, map<Style *, Competition *> competitions) {
+
     this->nom = nom;
     this->lieu = lieu;
     this->date = date;
-    this->competitions = vector<Competition *>();
-    this->resultat = new Resultat();
+    this->competitions = competitions;
+    this->resultat = Resultat();
+    map<Style *, Competition *>::iterator it;
+    for (it = competitions.begin(); it != competitions.end(); it++) {
+        this->resultat.ajouterGagnant(it->second->getSessions().back()->getGagnant());
+    }
+
 }
 
 Tournoi::~Tournoi() {
+
     delete this->lieu;
-    delete this->resultat;
-    for (Competition *competition: this->competitions) {
-        delete competition;
-    }
+
 }
 
-// Getters and setters
+string &Tournoi::getNom() {
+    return this->nom;
 
-const string &Tournoi::getNom() const {
-    return nom;
 }
 
-void Tournoi::setNom(const string &nom) {
-    Tournoi::nom = nom;
+string &Tournoi::getDate() {
+    return this->date;
 }
 
-Adresse *Tournoi::getLieu() const {
-    return lieu;
+Adresse *Tournoi::getLieu() {
+    return this->lieu;
+}
+
+Resultat Tournoi::getResultat() {
+    return this->resultat;
+}
+
+void Tournoi::setNom(string &nom) {
+    this->nom = nom;
+}
+
+void Tournoi::setDate(string &date) {
+    this->date = date;
 }
 
 void Tournoi::setLieu(Adresse *lieu) {
-    Tournoi::lieu = lieu;
+    this->lieu = lieu;
 }
 
-const string &Tournoi::getDate() const {
-    return date;
+void Tournoi::setResultat(Resultat resultat) {
+    this->resultat = resultat;
 }
 
-void Tournoi::setDate(const string &date) {
-    Tournoi::date = date;
-}
 
-const vector<Competition *> &Tournoi::getCompetitions() const {
-    return competitions;
-}
-
-void Tournoi::setCompetitions(const vector<Competition *> &competitions) {
-    Tournoi::competitions = competitions;
-}
-
-Resultat *Tournoi::getResultat() const {
-    return resultat;
-}
-
-void Tournoi::setResultat(Resultat *resultat) {
-    Tournoi::resultat = resultat;
-}
-
-// Overloaded operators
-
-
-ostream &operator<<(ostream &out, const Tournoi &tournoi) {
-    out << "nom: " << tournoi.nom << " lieu: " << *tournoi.lieu << " date: " << tournoi.date << " competitions: ";
-    for (Competition *competition: tournoi.competitions) {
-        out << *competition << " ";
+ostream &operator<<(ostream &out, Tournoi &tournoi) {
+    out << "********************* TOURNOI DE DANSE *********************" << endl;
+    out << "Nom: " << tournoi.nom << endl;
+    out << "Date: " << tournoi.date << endl;
+    out << "Lieu: " << endl;
+    out << *tournoi.lieu << endl;
+    map<Style *, Competition *>::iterator it;
+    for (it = tournoi.competitions.begin(); it != tournoi.competitions.end(); it++) {
+        out << "********************* Competition " << it->first->getNom() << " *********************" << endl;
+        out << *it->second << endl;
     }
-    cout << "resultat: " << *tournoi.resultat;
     return out;
 }
 
 istream &operator>>(istream &in, Tournoi &tournoi) {
-    cout << "nom: ";
+    cout << "Saisir les informations du tournoi:" << endl;
+    cout << "Nom: ";
     in >> tournoi.nom;
-    cout << "lieu: ";
-    in >> *tournoi.lieu;
-    cout << "date: ";
+    cout << "Date: ";
     in >> tournoi.date;
-    cout << "competitions: ";
-    for (Competition *competition: tournoi.competitions) {
-        in >> *competition;
-    }
+    cout << "Lieu: " << endl;
+    Adresse *adresse = new Adresse();
+    in >> *adresse;
+    tournoi.lieu = adresse;
 
+    char reponse;
+    do {
+
+        Style *style = new Style();
+        in >> *style;
+        Competition *competition = new Competition();
+        in >> *competition;
+        tournoi.competitions[style] = competition;
+        tournoi.resultat.ajouterGagnant(competition->getSessions().back()->getGagnant());
+        cout << "Voulez-vous ajouter une autre competition? (O/N): ";
+        in >> reponse;
+
+    } while (reponse == 'O' || reponse == 'o');
     return in;
+}
+
+Tournoi::Tournoi(const Tournoi &tournoi) {
+    this->nom = tournoi.nom;
+    this->lieu = tournoi.lieu;
+    this->date = tournoi.date;
+    this->competitions = tournoi.competitions;
+    this->resultat = tournoi.resultat;
+
+}
+
+void Tournoi::setCompetitions(map<Style *, Competition *> competitions) {
+    this->competitions = competitions;
+
+
+}
+
+map<Style *, Competition *> Tournoi::getCompetitions() {
+    return this->competitions;
+
 }
 
 

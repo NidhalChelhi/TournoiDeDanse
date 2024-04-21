@@ -8,28 +8,25 @@ using namespace std;
 class Resultat {
 
 private:
-    vector<Danseur *> gagnants;
+    vector<Danseur> gagnants;
+
 public:
-    // Constructeurs et destructeurs
-    Resultat();
 
-    Resultat(vector<Danseur *> gagnants);
+        Resultat();
 
-    ~Resultat();
+        Resultat(vector<Danseur> gagnants);
 
-    // Methodes
-    void ajouterGagnant(Danseur *d);
+        ~Resultat();
 
-    void afficherGagnants();
+        vector<Danseur> &getGagnants();
 
-    // Getters
-    vector<Danseur *> getGagnants();
+        void setGagnants(vector<Danseur> &gagnants);
 
-    // Setters
-    void setGagnants(vector<Danseur *> gagnants);
+        void ajouterGagnant(Danseur gagnant);
 
-    // Surcharge d'opérateurs
-    friend ostream &operator<<(ostream &os, const Resultat &resultat);
+        friend ostream &operator<<(ostream &os, Resultat resultat);
+
+        friend istream &operator>>(istream &in, Resultat &resultat);
 
 
 };

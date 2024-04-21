@@ -2,12 +2,10 @@
 
 
 Competition::Competition() {
-    style = new Style();
     nbSessionsInital = 0;
 };
 
-Competition::Competition(Style *style, int nbSessionsInital, vector<Session *> initialSessions) {
-    this->style = style;
+Competition::Competition(int nbSessionsInital, vector<Session *> initialSessions) {
     this->nbSessionsInital = nbSessionsInital;
 
     for (int i = 0; i < nbSessionsInital; i++) {
@@ -25,22 +23,20 @@ Competition::Competition(Style *style, int nbSessionsInital, vector<Session *> i
 };
 
 Competition::Competition(const Competition &competition) {
-    style = new Style(*competition.style);
-    nbSessionsInital = competition.nbSessionsInital;
-    for (int i = 0; i < nbSessionsInital; i++) {
-        sessions.push_back(new Session(*competition.sessions[i]));
+    this->nbSessionsInital = competition.nbSessionsInital;
+    for (int i = 0; i < competition.sessions.size(); i++) {
+        this->sessions.push_back(new Session(*competition.sessions[i]));
     }
-};
+}
+
 
 Competition::~Competition() {
-    delete style;
     for (int i = 0; i < sessions.size(); i++) {
         delete sessions[i];
     }
 }
 
 ostream &operator<<(ostream &out, const Competition &competition) {
-    out << "Style: " << *competition.style << endl;
     for (int i = 0; i < competition.sessions.size(); i++) {
         if (i == competition.sessions.size() - 1) {
             out << "**************** Finale ****************" << endl;
@@ -54,10 +50,7 @@ ostream &operator<<(ostream &out, const Competition &competition) {
 }
 
 istream &operator>>(istream &in, Competition &competition) {
-    cout << "******* Saisie d'une competition ******" << endl;
-    in >> *competition.style;
     cout << "Nombre de sessions: ";
-
     in >> competition.nbSessionsInital;
     for (int i = 0; i < competition.nbSessionsInital; i++) {
         cout << "*** Saisie de la session " << i + 1 << " ***" << endl;
@@ -80,6 +73,29 @@ istream &operator>>(istream &in, Competition &competition) {
         j = j + 2;
     };
     return in;
+}
+
+void Competition::affichageSpecial() {
+    for (int i = 0; i < nbSessionsInital; i++) {
+
+        cout << setw(8) << sessions[i]->getDanseur1()->getNom() << setw(8) << ""
+             << setw(8) << sessions[i]->getDanseur2()->getNom() << setw(8) << "";
+    };
+    cout << endl;
+    cout << endl;
+    int round = nbSessionsInital;
+    int startIndex = 0;
+    int k = 16;
+    while (round > 0) {
+        for (int i = startIndex; i < startIndex + round; i++) {
+            cout << setw(k) << sessions[i]->getGagnant().getNom() << setw(k) << "";
+        }
+        cout << endl;
+        startIndex += round;
+        round /= 2;
+        k = k * 2;
+
+    }
 };
 
 

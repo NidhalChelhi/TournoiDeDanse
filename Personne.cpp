@@ -2,10 +2,13 @@
 #include "Adresse.h"
 
 
+int Personne::nbPersonnes = 0;
+
 Personne::Personne() {
     this->CIN = 0;
     this->nom = "";
     this->prenom = "";
+    Personne::nbPersonnes++;
 
 }
 
@@ -13,6 +16,8 @@ Personne::Personne(int CIN, string nom, string prenom) {
     this->CIN = CIN;
     this->nom = nom;
     this->prenom = prenom;
+    Personne::nbPersonnes++;
+
 
 }
 
@@ -21,6 +26,8 @@ Personne::Personne(const Personne &p) {
     this->nom = p.nom;
     this->prenom = p.prenom;
     this->adresses = p.adresses;
+    Personne::nbPersonnes++;
+
 
 }
 
@@ -73,6 +80,8 @@ istream &operator>>(istream &in, Personne &p) {
 //        cout << "Ajouter une autre adresse? (o/n)";
 //        in >> rep;
 //    } while (rep == 'o');
+    Personne::nbPersonnes++;
+
     return in;
 
 

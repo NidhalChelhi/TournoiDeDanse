@@ -1,48 +1,45 @@
 #include "Resultat.h"
 
-
-// Constructeurs et destructeurs
 Resultat::Resultat() {
+
 }
 
-Resultat::Resultat(vector<Danseur *> gagnants) {
+Resultat::Resultat(vector<Danseur> gagnants) {
     this->gagnants = gagnants;
 }
 
 Resultat::~Resultat() {
+
 }
 
-void Resultat::ajouterGagnant(Danseur *d) {
-    gagnants.push_back(d);
-}
-
-void Resultat::afficherGagnants() {
-    for (int i = 0; i < gagnants.size(); i++) {
-        cout << gagnants[i]->getNom() << " " << gagnants[i]->getPrenom() << endl;
-    }
-}
-
-vector<Danseur *> Resultat::getGagnants() {
+vector<Danseur> &Resultat::getGagnants() {
     return gagnants;
 }
 
-// Setters
-
-void Resultat::setGagnants(vector<Danseur *> gagnants) {
+void Resultat::setGagnants(vector<Danseur> &gagnants) {
     this->gagnants = gagnants;
 }
 
+void Resultat::ajouterGagnant(Danseur gagnant) {
+    this->gagnants.push_back(gagnant);
+}
 
-// Surcharge d'opérateurs
-
-ostream &operator<<(ostream &os, const Resultat &resultat) {
+ostream &operator<<(ostream &os, Resultat resultat) {
     os << "Gagnants: " << endl;
     for (int i = 0; i < resultat.gagnants.size(); i++) {
-        os << resultat.gagnants[i]->getNom() << " " << resultat.gagnants[i]->getPrenom() << endl;
+        os << resultat.gagnants[i].getFullName() << ": ";
+        for (int j = 0; j < resultat.gagnants[i].getPerformances().size(); j++) {
+            os << resultat.gagnants[i].getPerformances()[j] << "    ";
+        }
+        os << endl;
     }
     return os;
 }
 
-
-
-
+istream &operator>>(istream &in, Resultat &resultat) {
+    cout << "Gagnants: ";
+    for (int i = 0; i < resultat.gagnants.size(); i++) {
+        in >> resultat.gagnants[i];
+    }
+    return in;
+}
