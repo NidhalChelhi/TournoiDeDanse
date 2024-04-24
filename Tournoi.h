@@ -9,46 +9,45 @@
 class Tournoi {
 
 private:
-string nom;
-Adresse *lieu;
-string date;
-map<Style *, Competition *> competitions;
-Resultat resultat;
+    string nom;
+    Adresse *lieu;
+    string date;
+    map<Style *, Competition *> competitions;
+    Resultat resultat;
 
 public:
-// Constructors and destructors
-Tournoi();
-
-Tournoi(string nom, Adresse *lieu, string date, map<Style *, Competition *> competitions);
-
-Tournoi(const Tournoi &tournoi);
-
-~Tournoi();
 
 
-// Getters and setters
-string &getNom();
+    Tournoi();
 
-string &getDate();
+    Tournoi(string nom, Adresse *lieu, string date, map<Style *, Competition *> competitions);
 
-Adresse *getLieu();
+    Tournoi(const Tournoi &tournoi);
 
-Resultat getResultat();
+    ~Tournoi();
 
-map<Style *, Competition *> getCompetitions();
+    string &getNom();
 
-void setNom(string &nom);
+    string &getDate();
 
-void setDate(string &date);
+    Adresse *getLieu();
 
-void setLieu(Adresse *lieu);
+    Resultat getResultat();
 
-void setResultat(Resultat resultat);
+    map<Style *, Competition *> getCompetitions();
 
-void setCompetitions(map<Style *, Competition *> competitions);
+    void setNom(string &nom);
 
-friend ostream &operator<<(ostream &os, Tournoi &tournoi);
+    void setDate(string &date);
 
-friend istream &operator>>(istream &in, Tournoi &tournoi);
+    void setLieu(Adresse *lieu);
+
+    void setResultat(Resultat resultat);
+
+    void setCompetitions(map<Style *, Competition *> competitions);
+
+    friend ostream &operator<<(ostream &os, Tournoi &tournoi);
+
+    friend istream &operator>>(istream &in, Tournoi &tournoi);
 
 };

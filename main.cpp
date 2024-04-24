@@ -1,7 +1,6 @@
 #include <iostream>
 #include "Tournoi.h"
 
-
 using namespace std;
 
 int main() {
@@ -54,5 +53,6 @@ int main() {
         }
     }
     system("pause");
-
+    cout << Personne::getNbPersonnes() << endl;
+    return 0;
 }
