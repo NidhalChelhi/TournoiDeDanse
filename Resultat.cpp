@@ -43,3 +43,13 @@ istream &operator>>(istream &in, Resultat &resultat) {
     }
     return in;
 }
+
+void Resultat::enregistrerFichier(Resultat &resultat) {
+    fstream f;
+    f.open("D:\\Resultat.txt", ios::in | ios::out | ios::app);
+    if (!f.is_open()) exit(-1);
+    for (int i = 0; i < resultat.gagnants.size(); i++) {
+        f << resultat.gagnants[i];
+    }
+}
+

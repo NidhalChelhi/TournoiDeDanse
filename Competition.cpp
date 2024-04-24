@@ -63,9 +63,9 @@ void Competition::affichageSpecial() {
 ostream &operator<<(ostream &out, const Competition &competition) {
     for (int i = 0; i < competition.sessions.size(); i++) {
         if (i == competition.sessions.size() - 1) {
-            out << "**************** Finale ****************" << endl;
+            out << "---------------- Finale ----------------" << endl;
         } else {
-            out << "**************** Session " << i + 1 << " ****************" << endl;
+            out << "---------------- Session " << i + 1 << " ----------------" << endl;
         }
 
         out << *competition.sessions[i] << endl;

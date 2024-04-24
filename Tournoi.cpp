@@ -66,14 +66,13 @@ void Tournoi::setResultat(Resultat resultat) {
 
 
 ostream &operator<<(ostream &out, Tournoi &tournoi) {
-    out << "********************* TOURNOI DE DANSE *********************" << endl;
+    out << "****************************************** TOURNOI DE DANSE ******************************************" << endl;
     out << "Nom: " << tournoi.nom << endl;
     out << "Date: " << tournoi.date << endl;
-    out << "Lieu: " << endl;
     out << *tournoi.lieu << endl;
     map<Style *, Competition *>::iterator it;
     for (it = tournoi.competitions.begin(); it != tournoi.competitions.end(); it++) {
-        out << "********************* Competition " << it->first->getNom() << " *********************" << endl;
+        out << "****************************************** Competition " << it->first->getNom() << " ******************************************" << endl;
         out << *it->second << endl;
     }
     return out;

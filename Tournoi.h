@@ -50,4 +50,11 @@ public:
 
     friend istream &operator>>(istream &in, Tournoi &tournoi);
 
+    void enregistrerFichier(Tournoi &tournoi) {
+        fstream f;
+        f.open("D:\\Tournoi.txt", ios::in | ios::out | ios::app);
+        if (!f.is_open()) exit(-1);
+        f << tournoi;
+    }
+
 };

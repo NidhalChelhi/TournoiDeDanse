@@ -12,8 +12,9 @@ int main() {
         cout << "2. Afficher Tournoi" << endl;
         cout << "3. Afficher Tableau" << endl;
         cout << "4. Afficher Resultats" << endl;
-        cout << "5. Exit" << endl;
-        cout << "Enterer votre choix: ";
+        cout << "5. Enregistrer Fichier" << endl;
+        cout << "6. Quittez" << endl;
+        cout << "Entrer votre choix: ";
         cin >> choice;
 
         switch (choice) {
@@ -43,6 +44,11 @@ int main() {
 
             }
             case 5: {
+                tournoi.enregistrerFichier(tournoi);
+                cout << "Fichier enregistre avec succes" << endl;
+                break;
+            }
+            case 6: {
                 cout << "Exiting..." << endl;
                 return 0;
             }
